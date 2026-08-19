@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noval Rizki — Portfolio</title>
+  <meta name="description" content="Portofolio Noval Rizki — pengembang web, desain, dan eksplorasi teknologi." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>N</text></svg>" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="orb orb-a" aria-hidden="true"></div>
+  <div class="orb orb-b" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="logo" href="#top">NR<span>.</span></a>
+    <nav>
+      <a href="#about">Tentang</a>
+      <a href="#skills">Keahlian</a>
+      <a href="#work">Karya</a>
+      <a href="#contact">Kontak</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Mari ngobrol</a>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="eyebrow">Siswa · Pengembang · Pembelajar</p>
+      <h1>
+        Halo, saya <em>Noval Rizki</em>.
+        <span>Membangun pengalaman digital yang rapi, cepat, dan punya karakter.</span>
+      </h1>
+      <p class="lede">
+        Portofolio ini hidup di <strong>siswa.pallrzki.my.id</strong> —
+        ruang untuk menampilkan proyek, eksperimen, dan perjalanan belajar saya.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#work">Lihat karya</a>
+        <a class="btn ghost" href="#contact">Hubungi saya</a>
+      </div>
+      <dl class="stats">
+        <div>
+          <dt>Fokus</dt>
+          <dd>Web & UI</dd>
+        </div>
+        <div>
+          <dt>Status</dt>
+          <dd>Terbuka untuk kolaborasi</dd>
+        </div>
+        <div>
+          <dt>Host</dt>
+          <dd>VPS · siswa.pallrzki.my.id</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-head">
+        <p class="kicker">01 — Tentang</p>
+        <h2>Sederhana di permukaan, teliti di balik layar.</h2>
+      </div>
+      <div class="about-grid">
+        <p>
+          Saya Noval Rizki. Saya tertarik merancang antarmuka yang terasa hidup —
+          tipografi yang tenang, gerak yang tidak berlebihan, dan kode yang mudah dirawat.
+        </p>
+        <p>
+          Saat ini saya terus mengasah keterampilan di HTML, CSS, JavaScript, dan alur kerja
+          deployment di server. Situs ini sendiri di-host di VPS pribadi sebagai latihan
+          nyata: dari DNS, Nginx, sampai detail performa.
+        </p>
+        <blockquote>
+          “Belajar paling cepat ketika ide langsung jadi sesuatu yang bisa dikunjungi orang.”
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="section-head">
+        <p class="kicker">02 — Keahlian</p>
+        <h2>Alat yang saya pakai setiap hari.</h2>
+      </div>
+      <ul class="skills">
+        <li>
+          <h3>Frontend</h3>
+          <p>HTML semantik, CSS modern, animasi halus, layout responsif.</p>
+        </li>
+        <li>
+          <h3>JavaScript</h3>
+          <p>Interaksi, DOM, fetch API, dan struktur komponen sederhana.</p>
+        </li>
+        <li>
+          <h3>Server</h3>
+          <p>Nginx, static hosting, domain, dan dasar keamanan VPS.</p>
+        </li>
+        <li>
+          <h3>Desain</h3>
+          <p>Hierarki visual, tipografi, palet, dan sistem spacing.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="work" class="section">
+      <div class="section-head">
+        <p class="kicker">03 — Karya</p>
+        <h2>Beberapa hal yang sedang atau sudah saya kerjakan.</h2>
+      </div>
+      <div class="work">
+        <article class="card featured">
+          <p class="tag">Live</p>
+          <h3>siswa.pallrzki.my.id</h3>
+          <p>Situs portofolio ini — dibangun dari nol, di-host di VPS, dengan fokus pada tipografi dan performa.</p>
+        </article>
+        <article class="card">
+          <p class="tag">Eksperimen</p>
+          <h3>UI Playground</h3>
+          <p>Kumpulan komponen kecil: tombol, kartu, dan transisi halaman.</p>
+        </article>
+        <article class="card">
+          <p class="tag">Belajar</p>
+          <h3>Catatan Sistem</h3>
+          <p>Dokumentasi pribadi tentang Nginx, DNS, dan alur deploy statis.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="section-head">
+        <p class="kicker">04 — Kontak</p>
+        <h2>Punya ide, tugas, atau sekadar ingin ngobrol?</h2>
+      </div>
+      <p class="lede">Kirim pesan. Saya akan membalas secepat yang saya bisa.</p>
+      <div class="contact-row">
+        <a class="btn primary" href="mailto:noval@siswa.pallrzki.my.id">noval@siswa.pallrzki.my.id</a>
+        <a class="btn ghost" href="https://siswa.pallrzki.my.id" target="_blank" rel="noopener">siswa.pallrzki.my.id</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Noval Rizki. Dibuat dengan niat, di-host di VPS.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
