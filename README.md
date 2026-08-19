@@ -23,7 +23,6 @@ Cek: `dig +short siswa.pallrzki.my.id`
 ```bash
 ssh root@69.33.213.153
 
-export CERTBOT_EMAIL=email-anda@contoh.com
 # opsional: BRANCH=main  REPO_URL=https://github.com/valngawi-droid/porto.git
 curl -fsSL https://raw.githubusercontent.com/valngawi-droid/porto/main/deploy/setup-vps.sh | bash
 ```
@@ -32,7 +31,7 @@ Atau clone sendiri dulu, lalu jalankan skrip dari dalam repo:
 
 ```bash
 git clone --branch main https://github.com/valngawi-droid/porto.git /var/www/porto
-sudo CERTBOT_EMAIL=email-anda@contoh.com bash /var/www/porto/deploy/setup-vps.sh
+sudo bash /var/www/porto/deploy/setup-vps.sh
 ```
 
 Yang terjadi:
