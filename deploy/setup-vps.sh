@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Jalankan SEKALI di VPS sebagai root (metode git clone):
-#   export CERTBOT_EMAIL=anda@email.com
 #   curl -fsSL https://raw.githubusercontent.com/valngawi-droid/porto/main/deploy/setup-vps.sh | bash
 set -euo pipefail
 
@@ -9,7 +8,6 @@ BRANCH="${BRANCH:-main}"
 DOMAIN="${DOMAIN:-siswa.pallrzki.my.id}"
 SITE_ROOT="/var/www/porto"
 CERT_ROOT="/var/www/certbot"
-EMAIL="${CERTBOT_EMAIL:-admin@${DOMAIN}}"
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -46,7 +44,8 @@ ufw allow 'Nginx Full' || true
 ufw --force enable || true
 
 if [[ ! -d "/etc/letsencrypt/live/${DOMAIN}" ]]; then
-  certbot --nginx -d "$DOMAIN" --non-interactive --agree-tos -m "$EMAIL" --redirect || {
+  certbot --nginx -d "$DOMAIN" --non-interactive --agree-tos \
+    --register-unsafely-without-email --redirect || {
     echo "Certbot gagal. Cek DNS A ${DOMAIN} -> IP VPS, port 80 terbuka, lalu jalankan ulang." >&2
     exit 1
   }
