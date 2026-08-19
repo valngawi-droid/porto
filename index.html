@@ -139,8 +139,8 @@
       </div>
       <ol class="pipeline">
         <li><strong>Push</strong> ke <code>main</code> di GitHub.</li>
-        <li><strong>Actions</strong> merakit file statis dan rsync ke VPS.</li>
-        <li><strong>Nginx</strong> menyajikan situs di <code>/var/www/porto</code>.</li>
+        <li><strong>Actions</strong> SSH ke VPS lalu <code>git pull</code>.</li>
+        <li><strong>Nginx</strong> menyajikan hasil clone di <code>/var/www/porto</code>.</li>
         <li><strong>Certbot</strong> menjaga sertifikat Let’s Encrypt tetap hidup.</li>
       </ol>
     </section>

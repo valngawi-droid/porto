@@ -1,4 +1,4 @@
-name: Deploy ke VPS
+name: Deploy ke VPS (git pull)
 
 on:
   push:
@@ -14,9 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ secrets.VPS_HOST != '' }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Siapkan SSH
         env:
           VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
@@ -26,7 +23,7 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H "${{ secrets.VPS_HOST }}" >> ~/.ssh/known_hosts
 
-      - name: Rsync ke VPS
+      - name: git pull di VPS
         env:
           HOST: ${{ secrets.VPS_HOST }}
           USER: ${{ secrets.VPS_USER }}
@@ -34,20 +31,5 @@ jobs:
         run: |
           PORT="${PORT:-22}"
           USER="${USER:-root}"
-          rsync -az --delete \
-            -e "ssh -p $PORT -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=yes" \
-            --exclude '.git' \
-            --exclude '.github' \
-            --exclude 'deploy' \
-            --exclude 'README.md' \
-            ./ "${USER}@${HOST}:/var/www/porto/"
-
-      - name: Reload Nginx
-        env:
-          HOST: ${{ secrets.VPS_HOST }}
-          USER: ${{ secrets.VPS_USER }}
-          PORT: ${{ secrets.VPS_PORT }}
-        run: |
-          PORT="${PORT:-22}"
-          USER="${USER:-root}"
-          ssh -p "$PORT" -i ~/.ssh/id_ed25519 "${USER}@${HOST}" 'nginx -t && systemctl reload nginx'
+          ssh -p "$PORT" -i ~/.ssh/id_ed25519 "${USER}@${HOST}" \
+            'bash /var/www/porto/deploy/update.sh'

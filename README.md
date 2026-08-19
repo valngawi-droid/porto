@@ -4,88 +4,81 @@ Situs statis untuk **Noval Rizki**
 Domain: **https://siswa.pallrzki.my.id**  
 VPS: **69.33.213.153**
 
-Alur: **GitHub → GitHub Actions (rsync) → Nginx di VPS → SSL Let’s Encrypt**.
+Alur: **GitHub → `git clone` di VPS → `git pull` (manual atau Actions) → Nginx + SSL**.
 
 ---
 
 ## 1. DNS
 
-Di penyedia domain `pallrzki.my.id`, buat record:
-
 | Tipe | Nama | Nilai |
 |------|------|--------|
 | A | `siswa` | `69.33.213.153` |
 
-Tunggu sampai `dig +short siswa.pallrzki.my.id` mengembalikan IP itu.
+Cek: `dig +short siswa.pallrzki.my.id`
 
 ---
 
-## 2. Setup sekali di VPS (SSL + Nginx + kunci deploy)
-
-SSH ke VPS, lalu:
+## 2. Setup sekali di VPS — git clone + SSL
 
 ```bash
 ssh root@69.33.213.153
-# atau user sudo Anda
 
 export CERTBOT_EMAIL=email-anda@contoh.com
+# opsional: BRANCH=main  REPO_URL=https://github.com/valngawi-droid/porto.git
 curl -fsSL https://raw.githubusercontent.com/valngawi-droid/porto/main/deploy/setup-vps.sh | bash
 ```
 
-Kalau repo belum di `main`, clone dulu branch kerja lalu:
+Atau clone sendiri dulu, lalu jalankan skrip dari dalam repo:
 
 ```bash
-sudo CERTBOT_EMAIL=email-anda@contoh.com bash deploy/setup-vps.sh
+git clone --branch main https://github.com/valngawi-droid/porto.git /var/www/porto
+sudo CERTBOT_EMAIL=email-anda@contoh.com bash /var/www/porto/deploy/setup-vps.sh
 ```
 
-Skrip ini akan:
+Yang terjadi:
 
-1. Install `git`, `nginx`, `certbot`, `rsync`, `ufw`
-2. Clone repo ke `/opt/porto` dan salin file ke `/var/www/porto`
-3. Pasang Nginx HTTP, lalu **Certbot** untuk HTTPS
-4. Redirect HTTP → HTTPS
-5. Generate kunci SSH deploy dan menaruh public key di `authorized_keys`
-
-Setelah selesai, buka **https://siswa.pallrzki.my.id**.
+1. `git clone` repo ke **`/var/www/porto`** (itu juga document root Nginx)
+2. Install Nginx + Certbot, pasang HTTPS Let’s Encrypt
+3. Blokir akses publik ke `.git` dan `/deploy`
+4. Generate kunci SSH untuk GitHub Actions
 
 ---
 
-## 3. Hubungkan GitHub → VPS
+## 3. Update situs (git pull)
 
-Di GitHub: **Settings → Secrets and variables → Actions → New repository secret**
-
-| Secret | Isi |
-|--------|-----|
-| `VPS_HOST` | `69.33.213.153` |
-| `VPS_USER` | `root` (atau user deploy) |
-| `VPS_PORT` | `22` (opsional) |
-| `VPS_SSH_KEY` | **private key** yang dicetak skrip (`/root/.ssh/github_deploy`) |
-
-Workflow: `.github/workflows/deploy.yml`  
-Setiap **push ke `main`** akan `rsync` file statis ke `/var/www/porto/` lalu reload Nginx.
-
----
-
-## 4. Rilis berikutnya
+Di VPS, kapan saja:
 
 ```bash
-git add -A
-git commit -m "Update portfolio"
+sudo bash /var/www/porto/deploy/update.sh
+# sama dengan:
+# git -C /var/www/porto pull --ff-only origin main
+# sudo nginx -t && sudo systemctl reload nginx
+```
+
+---
+
+## 4. Otomatis dari GitHub (opsional)
+
+Secrets: `VPS_HOST`, `VPS_USER`, `VPS_PORT`, `VPS_SSH_KEY`  
+(private key dari `/root/.ssh/github_actions`)
+
+```bash
+mkdir -p .github/workflows
+cp deploy/github-deploy.yml .github/workflows/deploy.yml
+git add .github/workflows/deploy.yml
+git commit -m "Enable git-pull deploy"
 git push origin main
 ```
 
-Cek tab **Actions** di GitHub sampai job hijau. Situs langsung terbarui.
+Push ke `main` → Actions SSH → `git pull` di `/var/www/porto`.
 
 ---
 
-## 5. File penting
+## File
 
 | Path | Fungsi |
 |------|--------|
-| `index.html` `styles.css` `app.js` | Situs |
-| `deploy/setup-vps.sh` | Bootstrap VPS + SSL |
-| `deploy/nginx.bootstrap.conf` | Nginx sebelum sertifikat |
-| `deploy/nginx.conf` | Nginx HTTPS |
-| `.github/workflows/deploy.yml` | CI/CD |
-
-Sertifikat diperpanjang otomatis oleh `certbot.timer`.
+| `deploy/setup-vps.sh` | Clone + Nginx + SSL |
+| `deploy/update.sh` | `git pull` + reload Nginx |
+| `deploy/nginx.conf` | HTTPS |
+| `deploy/github-deploy.yml` | Template Actions |
