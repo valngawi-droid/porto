@@ -4,7 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Noval Rizki — Portfolio</title>
-  <meta name="description" content="Portofolio Noval Rizki — pengembang web, desain, dan eksplorasi teknologi." />
+  <meta name="description" content="Portofolio Noval Rizki. Web, UI, dan deployment di VPS." />
+  <meta property="og:title" content="Noval Rizki — Portfolio" />
+  <meta property="og:description" content="Membangun pengalaman digital yang rapi, cepat, dan punya karakter." />
+  <meta property="og:url" content="https://siswa.pallrzki.my.id" />
+  <link rel="canonical" href="https://siswa.pallrzki.my.id/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -22,6 +26,7 @@
       <a href="#about">Tentang</a>
       <a href="#skills">Keahlian</a>
       <a href="#work">Karya</a>
+      <a href="#stack">Stack</a>
       <a href="#contact">Kontak</a>
     </nav>
     <a class="nav-cta" href="#contact">Mari ngobrol</a>
@@ -35,25 +40,25 @@
         <span>Membangun pengalaman digital yang rapi, cepat, dan punya karakter.</span>
       </h1>
       <p class="lede">
-        Portofolio ini hidup di <strong>siswa.pallrzki.my.id</strong> —
-        ruang untuk menampilkan proyek, eksperimen, dan perjalanan belajar saya.
+        Live di <strong>siswa.pallrzki.my.id</strong> — di-host di VPS, di-deploy dari GitHub,
+        diamankan dengan SSL Let’s Encrypt.
       </p>
       <div class="hero-actions">
         <a class="btn primary" href="#work">Lihat karya</a>
-        <a class="btn ghost" href="#contact">Hubungi saya</a>
+        <a class="btn ghost" href="https://github.com/valngawi-droid/porto" target="_blank" rel="noopener">Sumber di GitHub</a>
       </div>
       <dl class="stats">
         <div>
           <dt>Fokus</dt>
-          <dd>Web & UI</dd>
+          <dd>Web &amp; UI</dd>
         </div>
         <div>
-          <dt>Status</dt>
-          <dd>Terbuka untuk kolaborasi</dd>
+          <dt>Pipeline</dt>
+          <dd>GitHub Actions → VPS</dd>
         </div>
         <div>
-          <dt>Host</dt>
-          <dd>VPS · siswa.pallrzki.my.id</dd>
+          <dt>Domain</dt>
+          <dd>siswa.pallrzki.my.id</dd>
         </div>
       </dl>
     </section>
@@ -65,13 +70,12 @@
       </div>
       <div class="about-grid">
         <p>
-          Saya Noval Rizki. Saya tertarik merancang antarmuka yang terasa hidup —
+          Saya Noval Rizki. Saya merancang antarmuka yang terasa hidup —
           tipografi yang tenang, gerak yang tidak berlebihan, dan kode yang mudah dirawat.
         </p>
         <p>
-          Saat ini saya terus mengasah keterampilan di HTML, CSS, JavaScript, dan alur kerja
-          deployment di server. Situs ini sendiri di-host di VPS pribadi sebagai latihan
-          nyata: dari DNS, Nginx, sampai detail performa.
+          Situs ini adalah latihan produksi sungguhan: git, Nginx, DNS, CI/CD, dan sertifikat HTTPS.
+          Bukan sekadar halaman cantik, tapi sistem yang bisa di-update dengan satu <code>git push</code>.
         </p>
         <blockquote>
           “Belajar paling cepat ketika ide langsung jadi sesuatu yang bisa dikunjungi orang.”
@@ -95,11 +99,11 @@
         </li>
         <li>
           <h3>Server</h3>
-          <p>Nginx, static hosting, domain, dan dasar keamanan VPS.</p>
+          <p>Nginx, UFW, Certbot, dan dasar keamanan VPS.</p>
         </li>
         <li>
-          <h3>Desain</h3>
-          <p>Hierarki visual, tipografi, palet, dan sistem spacing.</p>
+          <h3>Git &amp; CI</h3>
+          <p>GitHub Actions, rsync, deploy otomatis ke production.</p>
         </li>
       </ul>
     </section>
@@ -113,7 +117,7 @@
         <article class="card featured">
           <p class="tag">Live</p>
           <h3>siswa.pallrzki.my.id</h3>
-          <p>Situs portofolio ini — dibangun dari nol, di-host di VPS, dengan fokus pada tipografi dan performa.</p>
+          <p>Portofolio ini — statis, cepat, HTTPS, dan ter-deploy otomatis dari GitHub ke VPS.</p>
         </article>
         <article class="card">
           <p class="tag">Eksperimen</p>
@@ -121,32 +125,42 @@
           <p>Kumpulan komponen kecil: tombol, kartu, dan transisi halaman.</p>
         </article>
         <article class="card">
-          <p class="tag">Belajar</p>
-          <h3>Catatan Sistem</h3>
-          <p>Dokumentasi pribadi tentang Nginx, DNS, dan alur deploy statis.</p>
+          <p class="tag">Infra</p>
+          <h3>Git → VPS + SSL</h3>
+          <p>Bootstrap Nginx, Let’s Encrypt, dan workflow Actions untuk rilis satu perintah.</p>
         </article>
       </div>
     </section>
 
+    <section id="stack" class="section">
+      <div class="section-head">
+        <p class="kicker">04 — Alur rilis</p>
+        <h2>Dari commit sampai HTTPS.</h2>
+      </div>
+      <ol class="pipeline">
+        <li><strong>Push</strong> ke <code>main</code> di GitHub.</li>
+        <li><strong>Actions</strong> merakit file statis dan rsync ke VPS.</li>
+        <li><strong>Nginx</strong> menyajikan situs di <code>/var/www/porto</code>.</li>
+        <li><strong>Certbot</strong> menjaga sertifikat Let’s Encrypt tetap hidup.</li>
+      </ol>
+    </section>
+
     <section id="contact" class="section contact">
       <div class="section-head">
-        <p class="kicker">04 — Kontak</p>
+        <p class="kicker">05 — Kontak</p>
         <h2>Punya ide, tugas, atau sekadar ingin ngobrol?</h2>
       </div>
       <p class="lede">Kirim pesan. Saya akan membalas secepat yang saya bisa.</p>
       <div class="contact-row">
         <a class="btn primary" href="mailto:noval@siswa.pallrzki.my.id">noval@siswa.pallrzki.my.id</a>
-        <a class="btn ghost" href="https://siswa.pallrzki.my.id" target="_blank" rel="noopener">siswa.pallrzki.my.id</a>
+        <a class="btn ghost" href="https://siswa.pallrzki.my.id">siswa.pallrzki.my.id</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© <span id="year"></span> Noval Rizki. Dibuat dengan niat, di-host di VPS.</p>
+    <p>© <span id="year"></span> Noval Rizki · GitHub → VPS · HTTPS</p>
   </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>

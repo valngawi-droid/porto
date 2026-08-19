@@ -56,7 +56,9 @@ body {
   backdrop-filter: blur(16px);
   background: rgba(11, 12, 16, 0.55);
   border-bottom: 1px solid var(--line);
+  transition: padding 0.25s ease;
 }
+.nav.compact { padding-top: 0.75rem; padding-bottom: 0.75rem; }
 
 .logo {
   font-weight: 700;
@@ -215,6 +217,35 @@ h2 {
 }
 .card p:last-child { color: var(--muted); margin-top: 0.6rem; }
 
+.pipeline {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  counter-reset: step;
+}
+.pipeline li {
+  counter-increment: step;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.2rem;
+  color: var(--muted);
+}
+.pipeline li::before {
+  content: counter(step, decimal-leading-zero);
+  display: block;
+  color: var(--accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+}
+.pipeline strong { color: var(--ink); }
+.pipeline code, .about-grid code {
+  font-size: 0.88em;
+  color: var(--accent-2);
+}
+
 .contact { padding-bottom: 10vh; }
 .contact-row { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.4rem; }
 
@@ -227,6 +258,6 @@ footer {
 
 @media (max-width: 860px) {
   nav { display: none; }
-  .about-grid, .skills, .work, .stats { grid-template-columns: 1fr; }
+  .about-grid, .skills, .work, .stats, .pipeline { grid-template-columns: 1fr; }
   .card.featured { grid-row: auto; }
 }
