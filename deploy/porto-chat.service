@@ -1,0 +1,13 @@
+[Unit]
+Description=Noval portfolio realtime chat
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/www/porto
+ExecStart=/usr/bin/python3 /var/www/porto/server/chat_server.py
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

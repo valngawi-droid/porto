@@ -88,6 +88,8 @@ curl -fsSL https://raw.githubusercontent.com/valngawi-droid/porto/arena/01a01c6e
 
 ---
 
+Chat realtime: `systemctl enable --now porto-chat` (otomatis di setup). Halaman: `/chat.html`
+
 ### Step 6 — Cek hasil
 
 Di VPS:

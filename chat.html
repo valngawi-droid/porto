@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Noval — Realtime</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+  <canvas id="scene3d"></canvas>
+  <div class="noise"></div>
+  <div class="wrap">
+    <header class="nav" data-nav></header>
+    <main class="page">
+      <p class="kicker">Realtime</p>
+      <h1>Ngobrol dengan <em>Noval</em>.</h1>
+      <p class="lede">Pesan masuk ke server, Noval membalas. Nama kamu tersimpan di browser ini.</p>
+      <div class="chat-shell">
+        <aside class="chat-side">
+          <div class="presence">
+            <div class="avatar">NR</div>
+            <div>
+              <strong>Noval Rizki</strong>
+              <div><span class="dot"></span> online · 11 PPLG</div>
+            </div>
+          </div>
+          <p class="lede">SMK Al Madani Garut. Tanya sekolah, jurusan, atau proyek.</p>
+          <label class="lede" for="guest-name">Namamu</label>
+          <input id="guest-name" class="composer" style="width:100%;margin-top:.4rem;padding:.7rem 1rem;border-radius:999px;border:1px solid var(--line);background:#0b0d13;color:inherit" />
+        </aside>
+        <section class="chat-main">
+          <div id="msgs" class="msgs"></div>
+          <div id="typing" class="typing"></div>
+          <form id="composer" class="composer">
+            <input id="msg" autocomplete="off" placeholder="Tulis pesan untuk Noval…" />
+            <button type="submit">Kirim</button>
+          </form>
+        </section>
+      </div>
+    </main>
+    <footer class="site" data-foot></footer>
+  </div>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="js/partials.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/scene3d.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>

@@ -45,6 +45,11 @@ ufw --force enable || true
 
 bash "$SITE_ROOT/deploy/ssl.sh"
 
+cp "$SITE_ROOT/deploy/porto-chat.service" /etc/systemd/system/porto-chat.service
+systemctl daemon-reload
+systemctl enable --now porto-chat
+systemctl restart porto-chat
+
 if [[ ! -f /root/.ssh/github_actions ]]; then
   ssh-keygen -t ed25519 -N "" -f /root/.ssh/github_actions -C "porto-github-actions"
   cat /root/.ssh/github_actions.pub >> /root/.ssh/authorized_keys
