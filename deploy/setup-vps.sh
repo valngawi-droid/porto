@@ -43,20 +43,7 @@ ufw allow OpenSSH || true
 ufw allow 'Nginx Full' || true
 ufw --force enable || true
 
-if [[ ! -d "/etc/letsencrypt/live/${DOMAIN}" ]]; then
-  certbot --nginx -d "$DOMAIN" --non-interactive --agree-tos \
-    --register-unsafely-without-email --redirect || {
-    echo "Certbot gagal. Cek DNS A ${DOMAIN} -> IP VPS, port 80 terbuka, lalu jalankan ulang." >&2
-    exit 1
-  }
-fi
-
-if [[ -f /etc/letsencrypt/options-ssl-nginx.conf ]]; then
-  cp "$SITE_ROOT/deploy/nginx.conf" /etc/nginx/sites-available/"$DOMAIN"
-  nginx -t && systemctl reload nginx
-fi
-
-systemctl enable --now certbot.timer 2>/dev/null || true
+bash "$SITE_ROOT/deploy/ssl.sh"
 
 if [[ ! -f /root/.ssh/github_actions ]]; then
   ssh-keygen -t ed25519 -N "" -f /root/.ssh/github_actions -C "porto-github-actions"
